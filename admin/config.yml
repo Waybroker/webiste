@@ -1,6 +1,5 @@
 backend:
-  name: github
-  repo: Waybroker/webiste
+  name: git-gateway
   branch: main
 
 # Enable local development backend (requires running decap-cms-proxy-server locally)
