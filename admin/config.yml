@@ -1,0 +1,32 @@
+backend:
+  name: github
+  repo: Waybroker/webiste
+  branch: main
+
+# Enable local development backend (requires running decap-cms-proxy-server locally)
+local_backend: true
+
+# Media uploads destination
+media_folder: "assets/uploads"
+public_folder: "assets/uploads"
+
+# Content collections
+collections:
+  - name: "settings"
+    label: "Settings"
+    delete: false
+    files:
+      - name: "products"
+        label: "Products List"
+        file: "data/items.json"
+        fields:
+          - label: "Items"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.name}} ({{fields.price}})"
+            fields:
+              - { label: "Product Name", name: "name", widget: "string" }
+              - { label: "Time/Duration", name: "time", widget: "string" }
+              - { label: "Price", name: "price", widget: "string" }
+              - { label: "Product Image", name: "image", widget: "image" }
+              - { label: "Description", name: "description", widget: "text" }
