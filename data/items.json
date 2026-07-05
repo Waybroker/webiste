@@ -90,6 +90,13 @@
       "price": "35,000 IDQ",
       "image": "assets/software-license-imgs/envato.png",
       "description": "Unlock premium assets with Envato Elements. Get a private account for unlimited downloads, faster access, and priority support."
+    },
+    {
+      "name": "gemini pro",
+      "time": "18 months",
+      "price": "25000",
+      "image": "assets/uploads/gemini-ai.jpg",
+      "description": "18 month of gemeni pro with warrnaty of 2 months\n"
     }
   ]
 }
