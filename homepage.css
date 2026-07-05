@@ -1,0 +1,703 @@
+/* =========================================
+   1. VARIABLES & RESET
+   ========================================= */
+:root {
+    --background-color: hsl(226, 37%, 7%);
+    --text-color: hsl(210, 20%, 98%);
+    --button-color: hsl(242, 78%, 61%);
+    --windows-color: hsl(231, 39%, 14%);
+    --line-color: hsl(231, 39%, 28%);
+    --secondory-text-color: hsl(231, 13%, 69%);
+    --dark-background: hsl(229, 40%, 8%);
+    --purple-text: hsl(239, 68%, 62%);
+    --dark-button: hsl(224, 26%, 11%);
+    --bright-background: hsl(235, 40%, 24%);
+    --hover-background: hsl(238, 41%, 23%);
+    --hover-border-color: hsl(239, 42%, 38%);
+    --hover-shadow: hsl(236, 41%, 23%);
+    --color-error: #e74c3c;
+    --color-success: #2ecc71;
+    --color-warning: #f1c40f;
+    --second-background: hsl(224, 45%, 11%);
+}
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+html::-webkit-scrollbar{
+    display: none;
+}
+
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    background-color: var(--background-color);
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    color: var(--text-color);
+    overflow-x: hidden;
+}
+
+/* =========================================
+   2. KEYFRAME DEFINITIONS (The Magic)
+   ========================================= */
+
+/* A smooth slide-up and fade-in effect */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Gentle floating for images */
+@keyframes floatGentle {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+}
+
+/* A subtle pulse for attention-grabbing elements */
+@keyframes softPulse {
+    0% { box-shadow: 0 0 0 0 rgba(100, 108, 255, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(100, 108, 255, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(100, 108, 255, 0); }
+}
+
+
+/* =========================================
+   3. MAIN LAYOUT & HEADER
+   ========================================= */
+.main_div {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
+}
+
+.header {
+    padding: 20px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--line-color);
+    /* Animation on load */
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.header h2 {
+    margin: 0;
+    cursor: pointer;
+    font-size: 1.5rem;
+    letter-spacing: -0.5px;
+}
+
+.nav {
+    display: flex;
+    gap: 40px;
+    color: var(--secondory-text-color);
+}
+
+/* COOL ANIMATION: Underline slide effect on hover */
+.nav h3 {
+    margin: 0;
+    cursor: pointer;
+    font-size: 1rem;
+    position: relative;
+    padding-bottom: 5px;
+    transition: color 0.3s ease;
+}
+
+.nav a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.nav h3::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--button-color);
+    transition: width 0.3s ease-in-out;
+}
+
+.nav a:hover {
+    color: var(--button-color);
+}
+
+.nav h3:hover::after {
+    width: 100%; /* Line slides across */
+}
+
+/* =========================================
+   4. HERO SECTION
+   ========================================= */
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 30px;
+    margin-bottom: 80px;
+    gap: 50px;
+}
+
+.text-eara {
+    flex: 1;
+    max-width: 650px;
+    /* Staggered entrance animation */
+    animation: fadeInUp 0.8s ease-out 0.2s backwards; /* 0.2s delay */
+}
+
+.note {
+    background-color: var(--windows-color);
+    color: var(--purple-text);
+    width: fit-content;
+    border-radius: 6px;
+    padding: 8px 16px;
+    margin-bottom: 20px;
+    font-weight: 500;
+    display: inline-block;
+    /* Subtle continuous pulse */
+    animation: softPulse 3s infinite;
+}
+
+.note p {
+    margin: 0;
+}
+
+.market-details {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.main-text h1 {
+    font-size: clamp(32px, 5vw, 56px);
+    line-height: 1.1;
+    margin-bottom: 20px;
+    /* Gradient text effect for extra "cool" factor */
+    background: linear-gradient(to right, var(--text-color), var(--button-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.main-text p {
+    color: var(--secondory-text-color);
+    line-height: 1.6;
+    font-size: 1.1rem;
+    max-width: 90%;
+}
+
+/* Buttons */
+.action-buttons {
+    margin-top: 40px;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.view-item-button, .contact-button {
+    padding: 15px 35px;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    /* Snappy transition for hover */
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Bouncy effect */
+}
+
+.view-item-button {
+    background-color: var(--button-color);
+    border: none;
+    color: white;
+    box-shadow: 0 4px 15px rgba(100, 108, 255, 0.3);
+}
+
+.contact-button {
+    background-color: transparent;
+    border: 2px solid var(--line-color);
+    color: var(--secondory-text-color);
+}
+
+/* COOL ANIMATION: Bouncy Buttons on Hover */
+.view-item-button:hover {
+    transform: translateY(-5px) scale(1.05);
+    background-color: hsl(242, 78%, 66%); /* Slightly lighter */
+    box-shadow: 0 10px 25px rgba(100, 108, 255, 0.5);
+}
+
+.contact-button:hover {
+    transform: translateY(-5px);
+    border-color: var(--button-color);
+    color: var(--button-color);
+}
+
+/* Social Media */
+.social-media {
+    margin-top: 20px;
+    display: flex;
+    gap: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line-color);
+    animation: fadeInUp 0.8s ease-out 0.4s backwards; /* 0.4s delay */
+}
+
+.social-media img {
+    cursor: pointer;
+    width: 36px;
+
+    transition: all 0.3s ease;
+
+}
+
+/* COOL ANIMATION: Icons pop and colorize on hover */
+.social-media img:hover {
+   
+    transform: translateY(-5px) scale(1.1);
+}
+
+/* Hero Image Area */
+.image-eara {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    /* Entrance animation with longer delay */
+    animation: fadeInUp 1s ease-out 0.5s backwards;
+}
+
+.img {
+    border-radius: 40% 30% 40% 30%;
+    background: linear-gradient(135deg, var(--bright-background), var(--background-color));
+    padding: 30px;
+    border: 1px solid var(--line-color);
+    /* Continuous floating motion */
+    animation: floatGentle 6s ease-in-out infinite;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
+
+.image-eara img {
+    width: 100%;
+    max-width: 380px;
+    border-radius: 50%;
+    display: block;
+    transition: transform 0.5s ease;
+}
+/* Subtle interaction with the main image */
+.img:hover img {
+    transform: scale(1.03);
+}
+
+
+/* =========================================
+   5. ITEMS GRID (HOT PICKS)
+   ========================================= */
+.hot-picks {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 120px;
+    /* Animate the whole section in */
+    animation: fadeInUp 1s ease-out 0.8s backwards;
+}
+
+.items-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    width: 100%;
+    margin-top: 60px;
+}
+
+.item-card {
+    background: radial-gradient(circle at top, var(--bright-background), var(--windows-color) 60%);
+    padding: 30px 25px;
+    border: 1px solid var(--line-color);
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Smooth transition for hover states */
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+}
+
+/* COOL ANIMATION: Card lift and glow */
+.item-card:hover {
+    background-color: var(--hover-background);
+    border-color: var(--hover-border-color);
+    box-shadow: 0 15px 35px var(--hover-shadow);
+    transform: translateY(-10px) scale(1.02);
+}
+
+.hidden {
+   line-height: 1.5;
+    color: var(--secondory-text-color);
+    font-size: 0.9rem;
+    
+}
+
+/* Adds a subtle shiny flash effect on hover */
+.item-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255,255,255, 0.1), transparent);
+    transition: all 0.6s;
+}
+.item-card:hover::before {
+    left: 100%;
+}
+
+.item-card img {
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+    margin-bottom: 25px;
+    transition: transform 0.4s ease;
+}
+
+/* Little pop for the icon on hover */
+.item-card:hover img {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.name-price {
+    width: 100%;
+    text-align: center;
+}
+
+.name-price .name {
+    font-size: 1.2rem;
+    margin: 10px 0;
+}
+
+.name-price .time {
+    color: var(--color-warning);
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+    display: inline-block;
+    
+    padding: 4px 12px;
+    border-radius: 20px;
+}
+
+
+
+.name-price .price {
+    background-color: rgba(46, 204, 113, 0.1);
+    color: var(--color-success);
+    padding: 8px 20px;
+    border-radius: 15px;
+    display: inline-block;
+    font-size: 1.1rem;
+    margin: 0;
+    font-weight: 800;
+}
+
+/* =========================================
+   6. AGREEMENTS SECTION
+   ========================================= */
+.agreements-section {
+    background: radial-gradient(circle at center, var(--second-background), var(--background-color));
+    display: flex;
+    flex-direction: row;
+    padding: 80px 50px;
+    gap: 60px;
+    border-radius: 30px;
+    border: 1px solid var(--line-color);
+    margin-bottom: 100px;
+    /* Subtle pulse for the whole section */
+    box-shadow: 0 0 30px rgba(0,0,0,0.2);
+}
+
+.left, .right {
+    flex: 1;
+}
+
+.right .point {
+    margin-bottom: 35px;
+    border-left: 3px solid var(--line-color);
+    padding-left: 25px;
+    transition: all 0.3s ease;
+}
+
+/* Highlight points when hovered */
+.right .point:hover {
+    border-left-color: var(--button-color);
+    transform: translateX(10px);
+}
+
+.point h2 {
+    font-size: 1.3rem;
+    margin-top: 0;
+    color: var(--text-color);
+}
+
+.point p {
+    color: var(--secondory-text-color);
+    line-height: 1.6;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    margin-top: -50px;
+    margin-bottom: 100px;
+}
+
+.agreement {
+    background-color: rgba(231, 76, 60, 0.1);
+    color: var(--color-error);
+    border: 1px solid var(--color-error);
+    animation: softPulse 4s infinite;
+}
+
+/* =========================================
+   7. REVIEWS
+   ========================================= */
+.review {
+    margin-bottom: 100px;
+}
+
+.review h1 {
+    text-align: center;
+    margin-bottom: 60px;
+    font-size: 2.5rem;
+}
+
+.reivew-container {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+.review-card {
+    background-color: var(--windows-color);
+    padding: 35px;
+    border-radius: 25px;
+    border: 1px solid var(--line-color);
+    flex: 1;
+    min-width: 280px;
+    max-width: 350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 0.4s ease;
+    position: relative;
+}
+
+/* Add a quote icon via CSS */
+.review-card::before {
+    content: '“';
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    font-size: 80px;
+    color: var(--bright-background);
+    font-family: serif;
+    z-index: 0;
+}
+
+.review-card p {
+    font-style: italic;
+    color: var(--secondory-text-color);
+    line-height: 1.7;
+    position: relative;
+    z-index: 1;
+}
+
+.review-card h3 {
+    margin-top: 25px;
+    color: var(--button-color);
+    text-align: right;
+}
+
+.review-card:hover {
+    transform: translateY(-10px);
+    background-color: var(--bright-background);
+    border-color: var(--button-color);
+}
+
+/* =========================================
+   8. FOOTER
+   ========================================= */
+.footer {
+    background-color: black;
+    color: white;
+    padding: 80px 0 40px 0;
+    margin-top: 80px;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.footer-top {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 20px;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+.vertical h3 {
+    color: white;
+    margin-bottom: 25px;
+    font-size: 1.2rem;
+}
+
+.vertical p {
+    color: #888;
+    line-height: 2;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+.vertical p:hover {
+    color: var(--button-color);
+}
+
+.horizontal {
+    margin-top: 60px;
+    padding-top: 30px;
+    border-top: 1px solid #222;
+    width: 100%;
+    max-width: 1200px;
+    text-align: center;
+    color: #666;
+}
+
+
+/* =========================================
+   9. MEDIA QUERIES (RESPONSIVE TWEAKS)
+   ========================================= */
+
+/* --- TABLET (Below 992px) --- */
+@media (max-width: 991px) {
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        margin-top: 40px;
+    }
+
+    .text-eara {
+        max-width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .action-buttons {
+        justify-content: center;
+    }
+
+    .social-media {
+        justify-content: center;
+        border-top: none; /* Remove border on mobile layout */
+    }
+
+    .agreements-section {
+        flex-direction: column;
+        padding: 50px 30px;
+    }
+}
+
+/* --- MOBILE (Below 768px) --- */
+/* --- MOBILE (Below 768px) --- */
+@media (max-width: 767px) {
+    /* 1. Hide Elements */
+    .nav { display: none; }
+    .image-eara { display: none; }
+    .review-card:nth-child(n+3) { display: none; }
+
+    /* 2. Typography Adjustments */
+    .header h2 { font-size: 1.3rem; }
+    .main-text h1 { font-size: 2.2rem; }
+    .hot-picks .main-text h1 { font-size: 1.8rem; text-align: center;}
+    
+    /* 3. Button Adjustments */
+    .view-item-button, .contact-button {
+        width: 100%;
+        padding: 12px 20px;
+    }
+
+    /* 4. Footer Adjustments */
+    .footer-top {
+        flex-direction: column;
+        text-align: center;
+        gap: 30px;
+    }
+
+    /* ============================================
+       5. TWO-COLUMN GRID FIX (The part you asked for)
+       ============================================ */
+    .items-grid {
+        /* Force 2 columns regardless of screen width */
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 10px; /* Tighter gap for small screens */
+    }
+
+    .item-card {
+        /* Reduce padding so content fits */
+        padding: 15px 10px; 
+        border-radius: 20px; /* Slightly less rounded corners */
+    }
+
+    /* Make the images smaller */
+    .item-card img {
+        width: 50px; 
+        height: 50px;
+        margin-bottom: 10px;
+    }
+
+    .item-card:hover {
+    background-color: var(--hover-background);
+    border-color: var(--hover-border-color);
+    box-shadow: 0 15px 35px var(--hover-shadow);
+    transform: translateY(-2px) scale(1.02);
+}
+
+    /* Shrink the text inside the card */
+    .name-price .name {
+        font-size: 0.95rem; 
+        margin: 5px 0;
+    }
+
+    .name-price .time {
+        font-size: 0.75rem;
+        margin-bottom: 8px;
+    }
+
+    .name-price .price {
+        font-size: 0.85rem;
+        padding: 4px 10px; /* Smaller badge */
+        white-space: nowrap; /* Prevents price from breaking lines */
+    }
+
+    .description-hidden, 
+    .item-card p {
+        display: none !important;
+    }
+
+    
+}
